@@ -43,11 +43,37 @@ public class Racional {
         this.den = den;
     }
     
+    public void simplificar(int numerador,int denominador) {
+        int mcd = calcularMCD(numerador, denominador);
+        
+        //Redusco los numeradores y denominadores 
+        numerador = numerador/mcd;
+        denominador = denominador/mcd;
+        setNum(numerador);
+        setDen(denominador);
+    }
+
+    private int calcularMCD(int a, int b) {
+        //Calcular el maximo comun divisor , es mas facil que el minimo
+        while (b != 0) {
+            int aux = b;
+            //veo si son multiplos 
+            b = a % b;
+            a = aux;
+        }
+        return a;
+    }    
     public void ingresarFraccion(){
         System.out.println("ingrese numerador: ");
         setNum(ingreso.nextInt());
         System.out.println("ingrese denominador: ");
         setDen(ingreso.nextInt());
+        
+        //simplifico los racionales 
+        simplificar(getNum(),getDen());
+        
+        System.out.println("La simplificacion es "+getNum() + "/" + getDen());
+
     }
     
     
